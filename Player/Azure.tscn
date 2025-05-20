@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bkcxfdrjmn2q6"]
+
+[ext_resource type="Script" path="res://Player/Azure.gd" id="1_jicj2"]
+[ext_resource type="Texture2D" uid="uid://dxvt0cxtw7j6f" path="res://Assets/sprite_noDetail_boldColor_noFace.png" id="2_uwbh8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7g61y"]
+radius = 40.0
+height = 270.0
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+scale = Vector2(0.75, 0.75)
+script = ExtResource("1_jicj2")
+
+[node name="Azure" type="Sprite2D" parent="."]
+texture = ExtResource("2_uwbh8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 6)
+shape = SubResource("CapsuleShape2D_7g61y")

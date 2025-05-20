@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://b03r2xdni2dvo"]
+
+[ext_resource type="PackedScene" uid="uid://c2mfd25e7dubt" path="res://Background/Background.tscn" id="1_gkqgj"]
+[ext_resource type="PackedScene" uid="uid://bkcxfdrjmn2q6" path="res://Player/Azure.tscn" id="2_ivrtl"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rwse4"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Background" parent="." instance=ExtResource("1_gkqgj")]
+
+[node name="Azure" parent="." instance=ExtResource("2_ivrtl")]
+position = Vector2(800, 495)
+
+[node name="Camera2D" type="Camera2D" parent="Azure"]
+position = Vector2(-13.3333, -242.667)
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(795, 601)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape2D_rwse4")
