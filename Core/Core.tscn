@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://dkjbmowueoen6"]
+
+[ext_resource type="Shader" path="res://Core/Core.gdshader" id="1_cweov"]
+[ext_resource type="Texture2D" uid="uid://qnp8qbgdgfmb" path="res://Assets/obsidian.png" id="2_n0vv3"]
+
+[sub_resource type="Curve" id="Curve_fdp1d"]
+min_value = -1.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.288732, -0.68421), 0.0, 0.0, 0, 0, Vector2(0.309859, 0.305263), 0.0, 0.0, 0, 0, Vector2(0.387, 0.628), 0.0, 0.0, 0, 0, Vector2(0.5, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_1e07h"]
+curve = SubResource("Curve_fdp1d")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7sxq6"]
+shader = ExtResource("1_cweov")
+shader_parameter/curve = SubResource("CurveTexture_1e07h")
+
+[node name="RigidBody2D" type="StaticBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_7sxq6")
+texture = ExtResource("2_n0vv3")
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+copy_mode = 2
