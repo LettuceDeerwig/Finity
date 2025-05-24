@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c2mfd25e7dubt"]
 
-[ext_resource type="Script" path="res://Background/Background.gd" id="1_o6y5e"]
+[ext_resource type="Script" uid="uid://2vhpl4hryyya" path="res://Background/Background.gd" id="1_o6y5e"]
 [ext_resource type="Texture2D" uid="uid://ro67olucrdpu" path="res://Assets/parallax-forest-middle-trees.png" id="1_ulpc3"]
 [ext_resource type="Texture2D" uid="uid://bel5rqq5o5mhe" path="res://Assets/parallax-forest-back-trees.png" id="2_28vf8"]
 [ext_resource type="Texture2D" uid="uid://d2ftdjyjoamdb" path="res://Assets/parallax-forest-front-trees.png" id="3_i7eg4"]

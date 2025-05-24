@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://beio3ph14lxaj"]
+
+[ext_resource type="Texture2D" uid="uid://ro67olucrdpu" path="res://Assets/parallax-forest-middle-trees.png" id="2_0ni5k"]
+[ext_resource type="PackedScene" uid="uid://bsrihwmmig5kb" path="res://Rooms/LayerTest/c_LayerHandler.tscn" id="2_ivuv0"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rwse4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ivuv0"]
+size = Vector2(8000, 1000)
+
+[node name="Layer2" type="Node2D"]
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.7, 0.7)
+repeat_size = Vector2(1360, 0)
+repeat_times = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(680, 400)
+scale = Vector2(5, 5)
+texture = ExtResource("2_0ni5k")
+
+[node name="WorldCollision" type="Node2D" parent="."]
+
+[node name="Floor" type="StaticBody2D" parent="WorldCollision"]
+position = Vector2(0, 768)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldCollision/Floor"]
+shape = SubResource("WorldBoundaryShape2D_rwse4")
+
+[node name="CollisionObjectLayerHandler" parent="WorldCollision/Floor" instance=ExtResource("2_ivuv0")]
+
+[node name="Wall_L" type="StaticBody2D" parent="WorldCollision"]
+position = Vector2(-4000, 400)
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldCollision/Wall_L"]
+shape = SubResource("WorldBoundaryShape2D_rwse4")
+
+[node name="CollisionObjectLayerHandler" parent="WorldCollision/Wall_L" instance=ExtResource("2_ivuv0")]
+
+[node name="Wall_R" type="StaticBody2D" parent="WorldCollision"]
+position = Vector2(4000, 400)
+rotation = -1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldCollision/Wall_R"]
+shape = SubResource("WorldBoundaryShape2D_rwse4")
+
+[node name="CollisionObjectLayerHandler" parent="WorldCollision/Wall_R" instance=ExtResource("2_ivuv0")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, 404)
+shape = SubResource("RectangleShape2D_ivuv0")
