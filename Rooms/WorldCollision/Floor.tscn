@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://c54vom7pqmsyw"]
+
+[ext_resource type="Script" uid="uid://37lfwdywsjam" path="res://Rooms/WorldCollision/Floor.gd" id="1_yme2a"]
+[ext_resource type="PackedScene" uid="uid://bsrihwmmig5kb" path="res://Components/c_LayerHandler.tscn" id="2_6pskl"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rwse4"]
+
+[node name="Floor" type="StaticBody2D"]
+script = ExtResource("1_yme2a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("WorldBoundaryShape2D_rwse4")
+
+[node name="c_LayerHandler" parent="." instance=ExtResource("2_6pskl")]

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cnf72ljxn42xq"]
+
+[ext_resource type="Script" uid="uid://rp6asrveok81" path="res://Components/c_Walk.gd" id="1_21y72"]
+
+[node name="c_Walk" type="Node2D"]
+script = ExtResource("1_21y72")

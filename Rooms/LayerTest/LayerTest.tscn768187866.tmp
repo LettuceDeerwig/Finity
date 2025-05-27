@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://bjfy3stbli2x8"]
+
+[ext_resource type="Script" uid="uid://did5l7w82vtv4" path="res://Rooms/LayerTest/LayerTest.gd" id="1_0x1jf"]
+[ext_resource type="PackedScene" uid="uid://beio3ph14lxaj" path="res://Rooms/LayerTest/Layer2.tscn" id="1_4obeo"]
+[ext_resource type="PackedScene" uid="uid://kflgl58ckyjm" path="res://Rooms/LayerTest/Layer3.tscn" id="1_jc3m7"]
+[ext_resource type="PackedScene" uid="uid://c0ut52gk4fg2c" path="res://Rooms/LayerTest/Layer1.tscn" id="2_53h0k"]
+[ext_resource type="PackedScene" uid="uid://hgxuyd5gqwd" path="res://Rooms/LayerTest/Azure.tscn" id="5_nc5rp"]
+
+[node name="LayerTest" type="Node2D" node_paths=PackedStringArray("layer_1", "layer_2", "layer_3")]
+script = ExtResource("1_0x1jf")
+layer_1 = NodePath("Layer1")
+layer_2 = NodePath("Layer2")
+layer_3 = NodePath("Layer3")
+
+[node name="Layer3" parent="." groups=["RoomLayer3"] instance=ExtResource("1_jc3m7")]
+
+[node name="Layer2" parent="." groups=["RoomLayer2"] instance=ExtResource("1_4obeo")]
+
+[node name="Layer1" parent="." groups=["RoomLayer1"] instance=ExtResource("2_53h0k")]
+
+[node name="Azure" parent="Layer1" instance=ExtResource("5_nc5rp")]
+position = Vector2(576, 587)
+
+[editable path="Layer1/Azure"]

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://ttrhp6qmwp30"]
+
+[ext_resource type="PackedScene" uid="uid://c0ut52gk4fg2c" path="res://Rooms/RoomLayer.tscn" id="1_44c7p"]
+[ext_resource type="Texture2D" uid="uid://bel5rqq5o5mhe" path="res://Assets/parallax-forest-back-trees.png" id="2_8tjyk"]
+
+[node name="Layer3" instance=ExtResource("1_44c7p")]
+
+[node name="Parallax2D" parent="." index="0"]
+scroll_scale = Vector2(0.4, 0.4)
+
+[node name="Sprite2D" parent="Parallax2D" index="0"]
+texture = ExtResource("2_8tjyk")

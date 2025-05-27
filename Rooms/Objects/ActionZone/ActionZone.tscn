@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://bdwv1hy84j87d"]
+
+[ext_resource type="Script" uid="uid://cch17a5mvp5sl" path="res://Rooms/Objects/ActionZone/ActionZone.gd" id="1_fdpmj"]
+[ext_resource type="Shader" uid="uid://cm0nsa2n81645" path="res://VFX/Common/Shaders/TransparentBG.gdshader" id="2_6wcdk"]
+[ext_resource type="Texture2D" uid="uid://djq4fvpx7pilu" path="res://Assets/gate.png" id="3_3ry37"]
+[ext_resource type="PackedScene" uid="uid://bsrihwmmig5kb" path="res://Components/c_LayerHandler.tscn" id="4_3ry37"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uwqln"]
+shader = ExtResource("2_6wcdk")
+shader_parameter/bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ouia"]
+size = Vector2(36, 30.8)
+
+[node name="ActionZone" type="Area2D" node_paths=PackedStringArray("Layer")]
+collision_layer = 4
+collision_mask = 8
+priority = 1
+script = ExtResource("1_fdpmj")
+Layer = NodePath("c_LayerHandler")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_uwqln")
+texture = ExtResource("3_3ry37")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 20)
+shape = SubResource("RectangleShape2D_5ouia")
+
+[node name="c_LayerHandler" parent="." node_paths=PackedStringArray("base_object") instance=ExtResource("4_3ry37")]
+base_object = NodePath("..")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -19,10 +19,4 @@ layer_3 = NodePath("Layer3")
 [node name="Layer1" parent="." instance=ExtResource("3_7ylt2")]
 
 [node name="Azure" parent="." instance=ExtResource("5_nc5rp")]
-position = Vector2(593, 550)
-
-[node name="Label" type="Label" parent="Azure"]
-offset_left = -41.0
-offset_top = -258.0
-offset_right = 38.0
-offset_bottom = -209.0
+position = Vector2(580, 595)

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://b03r2xdni2dvo"]
 
 [ext_resource type="PackedScene" uid="uid://c2mfd25e7dubt" path="res://Background/Background.tscn" id="1_gkqgj"]
-[ext_resource type="PackedScene" uid="uid://bkcxfdrjmn2q6" path="res://Player/Azure.tscn" id="2_ivrtl"]
+[ext_resource type="PackedScene" uid="uid://bkcxfdrjmn2q6" path="res://Actors/Azure.tscn" id="2_ivrtl"]
 [ext_resource type="PackedScene" uid="uid://dkjbmowueoen6" path="res://Core/Core.tscn" id="3_1boof"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rwse4"]

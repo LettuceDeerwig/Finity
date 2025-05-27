@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://cs7wnei36siia"]
+
+[ext_resource type="PackedScene" uid="uid://bsrihwmmig5kb" path="res://Components/c_LayerHandler.tscn" id="1_6y2tg"]
+[ext_resource type="Script" uid="uid://df21s0vpu6cvb" path="res://Rooms/WorldCollision/Wall.gd" id="1_kcb7l"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rwse4"]
+
+[node name="Wall" type="StaticBody2D"]
+rotation = 1.5708
+script = ExtResource("1_kcb7l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("WorldBoundaryShape2D_rwse4")
+
+[node name="c_LayerHandler" parent="." instance=ExtResource("1_6y2tg")]

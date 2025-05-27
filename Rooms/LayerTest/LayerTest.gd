@@ -1,21 +1,21 @@
 extends Node2D
 
-@export var layer_1 : Node2D
-@export var layer_2 : Node2D
-@export var layer_3 : Node2D
+@export var layer_1 : RoomLayer
+@export var layer_2 : RoomLayer
+@export var layer_3 : RoomLayer
 
 func _ready():
-	var layerHandlers : Array[Node] = get_tree().get_nodes_in_group("LayerHandler")
-	for lh in layerHandlers:
-		if layer_1.is_ancestor_of(lh):
-			lh.initial_room_layer = 1
-		if layer_2.is_ancestor_of(lh):
-			lh.initial_room_layer = 2
-		if layer_3.is_ancestor_of(lh):
-			lh.initial_room_layer = 3
-		lh.connect("_request_reparent", ReparentObjectToNewLayer)
-		PopulateLayerHandlerComponents(lh)
-		lh.InitializeObjectLayers()			
+	var layerables : Array[Node] = get_tree().get_nodes_in_group("Layerable")
+	for obj in layerables:
+		if layer_1.is_ancestor_of(obj):
+			obj.Layer.initial_room_layer = 1
+		if layer_2.is_ancestor_of(obj):
+			obj.Layer.initial_room_layer = 2
+		if layer_3.is_ancestor_of(obj):
+			obj.Layer.initial_room_layer = 3
+		obj.Layer.connect("_request_reparent", ReparentObjectToNewLayer)
+		PopulateLayerHandlerComponents(obj)
+		obj.Layer.InitializeObjectLayers()			
 
 func ReparentObjectToNewLayer(handlerOwner):
 	if handlerOwner is CanvasItem:
@@ -30,6 +30,6 @@ func ReparentObjectToNewLayer(handlerOwner):
 		handlerOwner.reparent(newParent)
 
 #Populates any dependent components of a layer handler (to handle things like transforming textures)
-func PopulateLayerHandlerComponents(lh):
-	if lh.depth_scaler != null:
-		
+func PopulateLayerHandlerComponents(obj):
+	#if obj.depth_scaler != null:
+	pass

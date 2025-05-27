@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://0uwkb2foyxvp"]
+
+[ext_resource type="Script" uid="uid://dj4hmsy3s5w85" path="res://Rooms/Objects/ActionZone/BGDoor/c_ToLayer.gd" id="1_7gt3o"]
+
+[node name="c_ToLayer" type="Node2D"]
+script = ExtResource("1_7gt3o")

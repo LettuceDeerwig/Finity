@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://oigo7f4ik7hm"]
+
+[ext_resource type="PackedScene" uid="uid://c0ut52gk4fg2c" path="res://Rooms/RoomLayer.tscn" id="1_h0cwq"]
+[ext_resource type="PackedScene" uid="uid://dckv2v7uyall5" path="res://Rooms/Objects/ActionZone/BGDoor/BGDoor.tscn" id="2_fqtwi"]
+
+[node name="Layer1" instance=ExtResource("1_h0cwq")]
+
+[node name="BGDoor" parent="." index="2" instance=ExtResource("2_fqtwi")]
+position = Vector2(1295, 587)
