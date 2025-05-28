@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxv4jn58fv08b"]
+
+[ext_resource type="Script" uid="uid://dtp1kncsovuh7" path="res://Components/c_PropertyScaler.gd" id="1_pbkn0"]
+
+[node name="c_PropertyScaler" type="Node2D"]
+script = ExtResource("1_pbkn0")

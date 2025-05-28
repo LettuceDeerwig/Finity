@@ -8,6 +8,9 @@ class_name ActionZone
 
 var ActorsInZone : Array[Node2D]
 
+func _ready():
+	Action.InstanceId = InstanceId
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	#Execute any passive effects on actors within the zone

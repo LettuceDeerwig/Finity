@@ -12,7 +12,6 @@ func _physics_process(delta):
 		CurrentLayer = 3
 	if Input.is_key_pressed(KEY_4):
 		CurrentLayer = 4
-	DoorIcon.visible = true if buttonActions[0].Type == "door" else false
 	if Input.is_action_just_pressed("jump"):
 		InteractButton.ExecuteCurrentButtonAction(self)
 	var direction = Input.get_axis("left", "right")

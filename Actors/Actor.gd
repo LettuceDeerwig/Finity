@@ -1,11 +1,6 @@
 extends CharacterBody2D
 class_name Actor
 
-var buttonActions : Array[Dictionary] = [{"Action": Callable(self, "Jump"),
-			"Priority": 0,
-			"Type": "jump",
-			"InstanceId": null}]
-
 @export var texture : Sprite2D
 @export var Layer : c_LayerHandler
 @export var Walk : c_Walk

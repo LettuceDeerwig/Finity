@@ -10,3 +10,5 @@ script = ExtResource("2_7l4mp")
 Action = NodePath("c_ToLayer")
 
 [node name="c_ToLayer" parent="." index="3" instance=ExtResource("3_7l4mp")]
+to_layer = 2
+Priority = 1

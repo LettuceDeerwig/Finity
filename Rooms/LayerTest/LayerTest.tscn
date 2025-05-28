@@ -13,16 +13,18 @@ layer_2 = NodePath("Layer2")
 layer_3 = NodePath("Layer3")
 
 [node name="Layer3" parent="." instance=ExtResource("1_jc3m7")]
+depth_scale = 0.4
 
 [node name="Layer2" parent="." instance=ExtResource("1_4obeo")]
+depth_scale = 0.7
 
 [node name="Layer1" parent="." instance=ExtResource("3_7ylt2")]
 
 [node name="Azure" parent="." instance=ExtResource("5_nc5rp")]
-position = Vector2(593, 550)
+position = Vector2(598, 745)
 
 [node name="Label" type="Label" parent="Azure"]
 offset_left = -41.0
-offset_top = -258.0
+offset_top = -380.0
 offset_right = 38.0
-offset_bottom = -209.0
+offset_bottom = -331.0

@@ -2,8 +2,9 @@ extends "res://Components/c_ButtonAction.gd"
 class_name c_Jump
 
 @export var Velocity : c_Velocity
-
 @export var jump_velocity = -400.0
+
+@onready var Modifiers : c_ModifierHandler = $c_ModifierHandler
 
 func _ready():
 	Action = Jump 

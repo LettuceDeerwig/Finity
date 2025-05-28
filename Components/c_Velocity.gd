@@ -2,10 +2,12 @@ extends Node2D
 class_name c_Velocity
 
 @export var max_speed : float = 300.0
-@export var acceleration : float = max_speed
-@export var deceleration : float = acceleration
+@export var acceleration : float = 300.0
+@export var deceleration : float = 300.0
 @export var velocity : Vector2
 @export var gravity_controller : c_Gravity
+
+@onready var Modifiers : c_ModifierHandler = $c_ModifierHandler
 
 func _ready():
 	if acceleration == 0.0:
@@ -14,7 +16,8 @@ func _ready():
 		deceleration = acceleration
 
 func Move(characterBody : CharacterBody2D):
-	characterBody.velocity = velocity
+	characterBody.velocity = Vector2(Modifiers.ApplyAll(velocity.x),
+										Modifiers.ApplyAll(velocity.y))
 	characterBody.move_and_slide()
 	if characterBody.velocity.y == 0.0:
 		velocity.y = 0.0

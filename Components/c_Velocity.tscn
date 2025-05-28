@@ -1,7 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://802r3kcc3q20"]
+[gd_scene load_steps=3 format=3 uid="uid://802r3kcc3q20"]
 
 [ext_resource type="Script" uid="uid://brd5qp842b5hy" path="res://Components/c_Velocity.gd" id="1_7rmf2"]
+[ext_resource type="PackedScene" uid="uid://cyywjphps1n8x" path="res://Components/c_ModifierHandler.tscn" id="2_quxil"]
 
-[node name="c_Velocity" type="Node2D" node_paths=PackedStringArray("gravity_controller")]
+[node name="c_Velocity" type="Node2D"]
 script = ExtResource("1_7rmf2")
-gravity_controller = NodePath("")
+
+[node name="c_ModifierHandler" parent="." instance=ExtResource("2_quxil")]

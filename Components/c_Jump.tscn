@@ -1,3 +1,9 @@
-[gd_scene format=3 uid="uid://cihx47rhcvu35"]
+[gd_scene load_steps=3 format=3 uid="uid://cihx47rhcvu35"]
+
+[ext_resource type="Script" uid="uid://cdpncabnebfa7" path="res://Components/c_Jump.gd" id="1_i4xoe"]
+[ext_resource type="PackedScene" uid="uid://cyywjphps1n8x" path="res://Components/c_ModifierHandler.tscn" id="2_1lh4l"]
 
 [node name="c_Jump" type="Node2D"]
+script = ExtResource("1_i4xoe")
+
+[node name="c_ModifierHandler" parent="." instance=ExtResource("2_1lh4l")]
