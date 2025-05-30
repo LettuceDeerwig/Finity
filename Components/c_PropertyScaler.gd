@@ -14,7 +14,7 @@ func ScaleNodes():
 	for node in nodes_to_scale:
 		if "Modifiers" in node && node.Modifiers is c_ModifierHandler:
 			AddScaleModifier(node)
-		else: if "scale" in node && node.scale is Vector2:
+		elif "scale" in node && node.scale is Vector2:
 			node.scale = Vector2(scale_value, scale_value)
 
 func AddScaleModifier(node : Node):

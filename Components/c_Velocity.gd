@@ -25,8 +25,8 @@ func Move(characterBody : CharacterBody2D):
 func Accelerate(direction : int):
 	velocity.x = direction * (minf(max_speed, abs(velocity.x) + acceleration))
 
-func Decelerate():
-	velocity.x = maxf(0, velocity.x - deceleration)
+func Decelerate(direction : int):
+	velocity.x = direction * (maxf(0, abs(velocity.x) - deceleration))
 
 func AddGravity():
 	if gravity_controller != null:

@@ -1,21 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://c0ut52gk4fg2c"]
+[gd_scene load_steps=4 format=3 uid="uid://c0ut52gk4fg2c"]
 
 [ext_resource type="Script" uid="uid://fhcim1u6nkf5" path="res://Rooms/RoomLayer.gd" id="1_pyxtv"]
-[ext_resource type="Texture2D" uid="uid://d2ftdjyjoamdb" path="res://Assets/parallax-forest-front-trees.png" id="1_vk1g7"]
 [ext_resource type="PackedScene" uid="uid://cs7wnei36siia" path="res://Rooms/WorldCollision/Wall.tscn" id="3_j8axk"]
 [ext_resource type="PackedScene" uid="uid://c54vom7pqmsyw" path="res://Rooms/WorldCollision/Floor.tscn" id="4_3i6v4"]
 
-[node name="Layer1" type="Node2D"]
+[node name="RoomLayer" type="Node2D"]
 script = ExtResource("1_pyxtv")
-
-[node name="Parallax2D" type="Parallax2D" parent="."]
-repeat_size = Vector2(1360, 0)
-repeat_times = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
-position = Vector2(680, 400)
-scale = Vector2(5, 5)
-texture = ExtResource("1_vk1g7")
 
 [node name="WorldCollision" type="Node2D" parent="."]
 
@@ -28,3 +18,5 @@ position = Vector2(-4000, 0)
 [node name="Wall_R" parent="WorldCollision" instance=ExtResource("3_j8axk")]
 position = Vector2(4000, 0)
 rotation = 4.71239
+
+[node name="Layerables" type="Node2D" parent="."]

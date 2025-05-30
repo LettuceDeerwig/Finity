@@ -1,4 +1,5 @@
-extends "res://Actors/Actor.gd"
+extends Character
+class_name Azure
 
 @onready var DoorIcon = $DoorIcon
 @onready var vLabel = $Label
@@ -15,8 +16,8 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("jump"):
 		InteractButton.ExecuteCurrentButtonAction(self)
 	var direction = Input.get_axis("left", "right")
-	Walk.SetDirection(direction)
 	if direction != 0.0:
+		Walk.SetDirection(direction)
 		Walk.Step()
 	else:
 		Walk.Hold()

@@ -21,7 +21,7 @@ func Step():
 	Velocity.Move(character_body)
 			
 func Hold():
-	Velocity.Decelerate()
+	Velocity.Decelerate(Direction)
 	HandleGravity()
 	Velocity.Move(character_body)
 	

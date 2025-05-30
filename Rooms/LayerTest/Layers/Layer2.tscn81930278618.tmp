@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpio3q3klvq2f"]
+
+[ext_resource type="PackedScene" uid="uid://c0ut52gk4fg2c" path="res://Rooms/RoomLayer.tscn" id="1_71y0x"]
+[ext_resource type="Texture2D" uid="uid://ro67olucrdpu" path="res://Assets/parallax-forest-middle-trees.png" id="2_0ni5k"]
+[ext_resource type="PackedScene" uid="uid://cukx5vjwoo3c7" path="res://Actors/Mob/Venius.tscn" id="3_p83jv"]
+
+[node name="Layer2" instance=ExtResource("1_71y0x")]
+
+[node name="Parallax2D" parent="." index="0"]
+scroll_scale = Vector2(0.7, 0.7)
+repeat_size = Vector2(0, 0)
+repeat_times = 1
+
+[node name="Sprite2D" parent="Parallax2D" index="0"]
+texture = ExtResource("2_0ni5k")
+
+[node name="Venius" parent="Parallax2D" index="1" instance=ExtResource("3_p83jv")]
+position = Vector2(-1258, 723)
+
+[node name="Parallax2D2" type="Parallax2D" parent="Parallax2D" index="2"]
+scroll_scale = Vector2(0.5, 0.5)
+repeat_size = Vector2(1360, 0)
+repeat_times = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D/Parallax2D2" index="0"]
+position = Vector2(680, 400)
+scale = Vector2(5, 5)
+texture = ExtResource("2_0ni5k")

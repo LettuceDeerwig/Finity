@@ -1,15 +1,126 @@
-[gd_scene load_steps=5 format=3 uid="uid://cukx5vjwoo3c7"]
+[gd_scene load_steps=10 format=3 uid="uid://cukx5vjwoo3c7"]
 
-[ext_resource type="PackedScene" uid="uid://75kfy84wkju6" path="res://Actors/Actor.tscn" id="1_62fd2"]
+[ext_resource type="PackedScene" uid="uid://75kfy84wkju6" path="res://Actors/Characters/Character.tscn" id="1_62fd2"]
 [ext_resource type="Texture2D" uid="uid://b2gb6os0ugdra" path="res://Assets/Venius.png" id="2_iqh03"]
+[ext_resource type="Script" uid="uid://buwbv13jy8guq" path="res://Actors/Mob/Venius.gd" id="2_mg85f"]
 [ext_resource type="Shader" uid="uid://cm0nsa2n81645" path="res://VFX/Common/Shaders/TransparentBG.gdshader" id="2_t4mme"]
+[ext_resource type="PackedScene" uid="uid://cbkrlyfgid2an" path="res://Actors/Mob/VeniusSword.tscn" id="3_kyvu7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mg85f"]
 shader = ExtResource("2_t4mme")
-shader_parameter/bg_color = Color(0.537255, 0.309804, 0.309804, 1)
+shader_parameter/bg_color = Color(0.133333, 0.694118, 0.298039, 1)
 
-[node name="Venius" instance=ExtResource("1_62fd2")]
+[sub_resource type="Animation" id="Animation_vtnuc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VeniusSword:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-38, -80)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VeniusSword:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VeniusSword/c_Hitbox/Shape:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
-[node name="Sprite2D" parent="." index="0"]
+[sub_resource type="Animation" id="Animation_sefrx"]
+resource_name = "swing"
+length = 2.0
+step = 0.0833333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("VeniusSword:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.333333, 0.833333, 0.916667, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(162, -171), Vector2(162, -171), Vector2(-111, -298), Vector2(-111, -298), Vector2(164, -94), Vector2(-151, -65), Vector2(-151, -65)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("VeniusSword:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25, 0.333333, 0.833333, 0.916667, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-1.309, -1.309, -3.66519, -3.66519, -0.785397, 1.309, 1.309]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VeniusSword/c_Hitbox/Shape:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.833333, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jng2m"]
+_data = {
+&"RESET": SubResource("Animation_vtnuc"),
+&"swing": SubResource("Animation_sefrx")
+}
+
+[node name="Venius" node_paths=PackedStringArray("DependentObjects") instance=ExtResource("1_62fd2")]
+script = ExtResource("2_mg85f")
+DependentObjects = [NodePath("VeniusSword")]
+
+[node name="VeniusSword" parent="." index="0" instance=ExtResource("3_kyvu7")]
+position = Vector2(-38, -80)
+
+[node name="Sprite2D" parent="." index="1"]
 material = SubResource("ShaderMaterial_mg85f")
+position = Vector2(0.5, -135)
 texture = ExtResource("2_iqh03")
+
+[node name="c_Velocity" parent="." index="4"]
+max_speed = 600.0
+acceleration = 600.0
+deceleration = 600.0
+
+[node name="CollisionShape2D" parent="." index="7"]
+position = Vector2(0, -134)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10"]
+libraries = {
+&"": SubResource("AnimationLibrary_jng2m")
+}
+
+[editable path="VeniusSword"]
+[editable path="VeniusSword/c_LayerHandler"]
+[editable path="c_LayerHandler"]

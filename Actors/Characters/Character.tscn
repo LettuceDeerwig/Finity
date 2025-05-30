@@ -1,0 +1,54 @@
+[gd_scene load_steps=12 format=3 uid="uid://75kfy84wkju6"]
+
+[ext_resource type="Script" uid="uid://bf41h5efdbopw" path="res://Actors/Characters/Character.gd" id="1_kfha2"]
+[ext_resource type="PackedScene" uid="uid://bsrihwmmig5kb" path="res://Components/c_LayerHandler.tscn" id="2_ey42e"]
+[ext_resource type="PackedScene" uid="uid://dxv4jn58fv08b" path="res://Components/c_PropertyScaler.tscn" id="3_d0qhr"]
+[ext_resource type="PackedScene" uid="uid://802r3kcc3q20" path="res://Components/c_Velocity.tscn" id="3_pl1ju"]
+[ext_resource type="PackedScene" uid="uid://dj4vrxajil8l6" path="res://Components/c_Gravity.tscn" id="4_pl1ju"]
+[ext_resource type="PackedScene" uid="uid://cnf72ljxn42xq" path="res://Components/c_Walk.tscn" id="5_pl1ju"]
+[ext_resource type="PackedScene" uid="uid://ca8ngddhq6qcq" path="res://Components/c_InteractButton.tscn" id="7_j0oy3"]
+[ext_resource type="Script" uid="uid://crnp6g0ur3jan" path="res://Components/c_InteractButton.gd" id="8_3ssfw"]
+[ext_resource type="PackedScene" uid="uid://bk6pnd2p4dtcm" path="res://Components/c_StateMachine.tscn" id="8_j0oy3"]
+[ext_resource type="PackedScene" uid="uid://cihx47rhcvu35" path="res://Components/c_Jump.tscn" id="9_6rnnb"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6rnnb"]
+radius = 40.0
+height = 270.0
+
+[node name="Character" type="CharacterBody2D" node_paths=PackedStringArray("Walk", "Layer", "Scaler")]
+collision_layer = 9
+collision_mask = 13
+script = ExtResource("1_kfha2")
+Walk = NodePath("c_Walk")
+Layer = NodePath("c_LayerHandler")
+Scaler = NodePath("c_PropertyScaler")
+metadata/_custom_type_script = "uid://bf41h5efdbopw"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="c_LayerHandler" parent="." node_paths=PackedStringArray("Scaler") instance=ExtResource("2_ey42e")]
+Scaler = NodePath("../c_PropertyScaler")
+
+[node name="c_PropertyScaler" parent="." node_paths=PackedStringArray("nodes_to_scale") instance=ExtResource("3_d0qhr")]
+nodes_to_scale = [NodePath(".."), NodePath("../c_Velocity")]
+
+[node name="c_Velocity" parent="." node_paths=PackedStringArray("gravity_controller") instance=ExtResource("3_pl1ju")]
+gravity_controller = NodePath("../c_Gravity")
+
+[node name="c_Gravity" parent="." instance=ExtResource("4_pl1ju")]
+
+[node name="c_Walk" parent="." node_paths=PackedStringArray("Velocity") instance=ExtResource("5_pl1ju")]
+Velocity = NodePath("../c_Velocity")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 6)
+shape = SubResource("CapsuleShape2D_6rnnb")
+
+[node name="c_StateMachine" parent="." instance=ExtResource("8_j0oy3")]
+
+[node name="c_InteractButton" parent="." instance=ExtResource("7_j0oy3")]
+script = ExtResource("8_3ssfw")
+
+[node name="c_Jump" parent="." node_paths=PackedStringArray("Velocity") instance=ExtResource("9_6rnnb")]
+Velocity = NodePath("../c_Velocity")
+Type = "Jump"

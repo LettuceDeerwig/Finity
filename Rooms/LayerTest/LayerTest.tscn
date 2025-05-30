@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bjfy3stbli2x8"]
+[gd_scene load_steps=7 format=3 uid="uid://bjfy3stbli2x8"]
 
 [ext_resource type="Script" uid="uid://did5l7w82vtv4" path="res://Rooms/LayerTest/LayerTest.gd" id="1_0x1jf"]
 [ext_resource type="PackedScene" uid="uid://bpio3q3klvq2f" path="res://Rooms/LayerTest/Layers/Layer2.tscn" id="1_4obeo"]
 [ext_resource type="PackedScene" uid="uid://ttrhp6qmwp30" path="res://Rooms/LayerTest/Layers/Layer3.tscn" id="1_jc3m7"]
 [ext_resource type="PackedScene" uid="uid://oigo7f4ik7hm" path="res://Rooms/LayerTest/Layers/Layer1.tscn" id="3_7ylt2"]
 [ext_resource type="PackedScene" uid="uid://hgxuyd5gqwd" path="res://Actors/Azure/Azure.tscn" id="5_nc5rp"]
+[ext_resource type="Script" uid="uid://bvrvcdb7pqh78" path="res://Rooms/LayerTest/CameraAzure.gd" id="6_vi06h"]
 
 [node name="LayerTest" type="Node2D" node_paths=PackedStringArray("layer_1", "layer_2", "layer_3")]
 script = ExtResource("1_0x1jf")
@@ -28,3 +29,15 @@ offset_left = -41.0
 offset_top = -380.0
 offset_right = 38.0
 offset_bottom = -331.0
+
+[node name="CameraAzure" type="Camera2D" parent="." node_paths=PackedStringArray("azure")]
+zoom = Vector2(0.7, 0.7)
+limit_left = 0
+limit_top = -200
+limit_right = 2720
+limit_bottom = 800
+drag_horizontal_enabled = true
+editor_draw_limits = true
+editor_draw_drag_margin = true
+script = ExtResource("6_vi06h")
+azure = NodePath("../Azure")

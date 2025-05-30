@@ -1,50 +1,18 @@
-[gd_scene load_steps=12 format=3 uid="uid://75kfy84wkju6"]
+[gd_scene load_steps=4 format=3 uid="uid://3f75gc3dni2y"]
 
-[ext_resource type="Script" uid="uid://bf41h5efdbopw" path="res://Actors/Actor.gd" id="1_kfha2"]
+[ext_resource type="Script" uid="uid://cf3x0vqb2w1s7" path="res://Actors/Actor.gd" id="1_kfha2"]
 [ext_resource type="PackedScene" uid="uid://bsrihwmmig5kb" path="res://Components/c_LayerHandler.tscn" id="2_ey42e"]
-[ext_resource type="PackedScene" uid="uid://802r3kcc3q20" path="res://Components/c_Velocity.tscn" id="3_pl1ju"]
-[ext_resource type="PackedScene" uid="uid://dj4vrxajil8l6" path="res://Components/c_Gravity.tscn" id="4_pl1ju"]
-[ext_resource type="PackedScene" uid="uid://cnf72ljxn42xq" path="res://Components/c_Walk.tscn" id="5_pl1ju"]
-[ext_resource type="PackedScene" uid="uid://ca8ngddhq6qcq" path="res://Components/c_InteractButton.tscn" id="7_j0oy3"]
-[ext_resource type="Script" uid="uid://crnp6g0ur3jan" path="res://Components/c_InteractButton.gd" id="8_3ssfw"]
-[ext_resource type="PackedScene" uid="uid://bk6pnd2p4dtcm" path="res://Components/c_StateMachine.tscn" id="8_j0oy3"]
-[ext_resource type="PackedScene" uid="uid://cihx47rhcvu35" path="res://Components/c_Jump.tscn" id="9_6rnnb"]
-[ext_resource type="Script" uid="uid://cdpncabnebfa7" path="res://Components/c_Jump.gd" id="10_6rnnb"]
+[ext_resource type="PackedScene" uid="uid://dxv4jn58fv08b" path="res://Components/c_PropertyScaler.tscn" id="3_07ik2"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6rnnb"]
-radius = 40.0
-height = 270.0
-
-[node name="Actor" type="CharacterBody2D" node_paths=PackedStringArray("Layer", "Walk")]
-collision_layer = 9
-collision_mask = 13
+[node name="Actor" type="CharacterBody2D" node_paths=PackedStringArray("Layer", "Scaler")]
 script = ExtResource("1_kfha2")
 Layer = NodePath("c_LayerHandler")
-Walk = NodePath("c_Walk")
+Scaler = NodePath("c_PropertyScaler")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="c_LayerHandler" parent="." node_paths=PackedStringArray("Scaler") instance=ExtResource("2_ey42e")]
+Scaler = NodePath("../c_PropertyScaler")
 
-[node name="c_LayerHandler" parent="." node_paths=PackedStringArray("base_object") instance=ExtResource("2_ey42e")]
-base_object = NodePath("..")
+[node name="c_PropertyScaler" parent="." node_paths=PackedStringArray("nodes_to_scale") instance=ExtResource("3_07ik2")]
+nodes_to_scale = [NodePath("..")]
 
-[node name="c_Velocity" parent="." node_paths=PackedStringArray("gravity_controller") instance=ExtResource("3_pl1ju")]
-gravity_controller = NodePath("../c_Gravity")
-
-[node name="c_Gravity" parent="." instance=ExtResource("4_pl1ju")]
-
-[node name="c_Walk" parent="." node_paths=PackedStringArray("Velocity") instance=ExtResource("5_pl1ju")]
-Velocity = NodePath("../c_Velocity")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-2, 6)
-shape = SubResource("CapsuleShape2D_6rnnb")
-
-[node name="c_StateMachine" parent="." instance=ExtResource("8_j0oy3")]
-
-[node name="c_InteractButton" parent="." instance=ExtResource("7_j0oy3")]
-script = ExtResource("8_3ssfw")
-
-[node name="c_Jump" parent="." node_paths=PackedStringArray("Velocity") instance=ExtResource("9_6rnnb")]
-script = ExtResource("10_6rnnb")
-Velocity = NodePath("../c_Velocity")
-Type = "Jump"
+[connection signal="_layer_change_complete" from="c_LayerHandler" to="." method="_on_c_layer_handler__layer_change_complete"]

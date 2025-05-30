@@ -1,24 +1,38 @@
 extends CharacterBody2D
+##Default class for objects that can change room layers
 class_name Actor
 
-@export var texture : Sprite2D
-@export var Layer : c_LayerHandler
-@export var Walk : c_Walk
 @export var StateMachine : c_StateMachine
+@export var Layer : c_LayerHandler
+@export var Scaler : c_PropertyScaler
 
-@onready var InteractButton : c_InteractButton = $c_InteractButton
-@onready var Jump : c_Jump = $c_Jump
+@export var DependentObjects : Array[CollisionObject2D]
 
 var CurrentLayer: int :
 	get:
 		return Layer.GetLayer(self)
 	set(value):
-		Layer.ChangeLayer(value)
+		SetCurrentLayer(value)
 
 func _ready():
-	InteractButton.AddButtonAction(Jump)
+	_onActorReady()
 
-func Interact():
-	var action = InteractButton.GetHighestPriorityAvailableButtonAction(self)
-	if action != null:
-		action.Action.call(self)
+func _onActorReady():
+	self.add_to_group("Layerables")
+	Layer.connect("_layer_change_complete", _on_layer_change_complete)
+	for obj in DependentObjects:
+		obj.remove_from_group("Layerables")
+
+func SetCurrentLayer(layerNumber : int):
+	Layer.ChangeLayer(self, layerNumber)
+
+func _on_layer_change_complete(changedObject : CollisionObject2D):
+	if changedObject == self:
+		UpdateDependentObjectLayers()
+	
+func UpdateDependentObjectLayers():
+	for obj : CollisionObject2D in DependentObjects:
+		if "Layer" in obj && obj.Layer is c_LayerHandler:
+			obj.Layer.MoveObjectToRoomLayer(obj, CurrentLayer, Scaler.Scale)
+		else:
+			Layer.MoveObjectToRoomLayer(obj, CurrentLayer, Scaler.Scale)

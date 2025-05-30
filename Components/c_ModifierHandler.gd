@@ -58,7 +58,7 @@ func ApplyAll(baseValue : float) -> float:
 	return baseValue
 
 func Add(type : int, value : float, source : Node, apply = null):
-	var lastMod : Modifier = Modifiers.get(Modifiers.size() - 1)
+	var lastMod : Modifier = Modifiers.get(Modifiers.size() - 1) if Modifiers.size() > 0 else null
 	var newModId : int = lastMod.ID + 1 if lastMod != null else 0
 	Modifiers.append(Modifier.new(newModId, type, value, source, apply))
 

@@ -1,3 +1,6 @@
 extends StaticBody2D
 
-@onready var Layer : c_LayerHandler = $c_LayerHandler
+@export var Layer : c_LayerHandler
+
+func _ready():
+	self.add_to_group("Layerables")

@@ -9,5 +9,5 @@ func _ready():
 func CanPerform(characterBody : CharacterBody2D) -> bool:
 	return characterBody is Actor && characterBody.is_on_floor()
 
-func Teleport(characterBody : CharacterBody2D):
-	characterBody.Layer.ChangeLayer(to_layer)
+func Teleport(characterBody : Actor):
+	characterBody.CurrentLayer = to_layer

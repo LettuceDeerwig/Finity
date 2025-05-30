@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://hgxuyd5gqwd"]
+[gd_scene load_steps=11 format=3 uid="uid://hgxuyd5gqwd"]
 
-[ext_resource type="PackedScene" uid="uid://75kfy84wkju6" path="res://Actors/Actor.tscn" id="1_t0yss"]
+[ext_resource type="PackedScene" uid="uid://75kfy84wkju6" path="res://Actors/Characters/Character.tscn" id="1_t0yss"]
 [ext_resource type="Script" uid="uid://dv7ttb1y1jvia" path="res://Actors/Azure/Azure.gd" id="2_wg7tr"]
 [ext_resource type="Shader" uid="uid://cm0nsa2n81645" path="res://VFX/Common/Shaders/TransparentBG.gdshader" id="3_pp5od"]
 [ext_resource type="Texture2D" uid="uid://dxvt0cxtw7j6f" path="res://Assets/sprite_noDetail_boldColor_noFace.png" id="4_pjkdo"]
 [ext_resource type="Texture2D" uid="uid://cw15oose8y8wx" path="res://Assets/upArrow.png" id="5_wg7tr"]
+[ext_resource type="Script" uid="uid://ccnufvsysjbmv" path="res://Components/c_Hurtbox.gd" id="6_fc1ue"]
+[ext_resource type="PackedScene" uid="uid://bsrihwmmig5kb" path="res://Components/c_LayerHandler.tscn" id="7_in0k3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ow35x"]
 shader = ExtResource("3_pp5od")
@@ -14,31 +16,30 @@ shader_parameter/bg_color = Color(0.392157, 0.435294, 0.509804, 1)
 shader = ExtResource("3_pp5od")
 shader_parameter/bg_color = Color(0.392157, 0.435294, 0.509804, 1)
 
-[node name="Azure" node_paths=PackedStringArray("StateMachine") instance=ExtResource("1_t0yss")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ow35x"]
+size = Vector2(75, 257)
+
+[node name="Azure" node_paths=PackedStringArray("DependentObjects") instance=ExtResource("1_t0yss")]
 collision_layer = 11
 script = ExtResource("2_wg7tr")
-StateMachine = NodePath("c_StateMachine")
+DependentObjects = [NodePath("c_Hurtbox")]
 
-[node name="Camera2D" type="Camera2D" parent="." index="0"]
-position = Vector2(0, -316)
-
-[node name="Sprite2D" parent="." index="1"]
+[node name="Sprite2D" parent="." index="0"]
 material = SubResource("ShaderMaterial_ow35x")
 position = Vector2(0, -141)
 texture = ExtResource("4_pjkdo")
 
-[node name="DoorIcon" type="Sprite2D" parent="." index="2"]
+[node name="DoorIcon" type="Sprite2D" parent="." index="1"]
 visible = false
 material = SubResource("ShaderMaterial_pp5od")
 position = Vector2(0, -176)
 scale = Vector2(0.85, 0.85)
 texture = ExtResource("5_wg7tr")
 
-[node name="c_PropertyScaler" parent="c_LayerHandler" index="0" node_paths=PackedStringArray("nodes_to_scale")]
-nodes_to_scale = [NodePath("../.."), NodePath("../../c_Velocity"), NodePath("../../c_Gravity"), NodePath("../../c_Jump")]
-
 [node name="c_Velocity" parent="." index="4"]
-max_speed = 900.0
+max_speed = 600.0
+acceleration = 600.0
+deceleration = 600.0
 
 [node name="c_Gravity" parent="." index="5"]
 gravity = 40.0
@@ -50,7 +51,19 @@ position = Vector2(-2, -135)
 [node name="c_InteractButton" parent="." index="9" node_paths=PackedStringArray("Actions")]
 Actions = [NodePath("../c_Jump")]
 
-[node name="c_Jump" parent="." index="10"]
-jump_velocity = -1000.0
+[node name="c_Hurtbox" type="Area2D" parent="." index="10"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("6_fc1ue")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="c_Hurtbox" index="0"]
+position = Vector2(-6, -134.5)
+shape = SubResource("RectangleShape2D_ow35x")
+debug_color = Color(0.909859, 0.209985, 0.534268, 0.42)
+
+[node name="c_LayerHandler" parent="c_Hurtbox" index="1" instance=ExtResource("7_in0k3")]
+
+[node name="c_Jump" parent="." index="11"]
+jump_velocity = -800.0
 
 [editable path="c_LayerHandler"]

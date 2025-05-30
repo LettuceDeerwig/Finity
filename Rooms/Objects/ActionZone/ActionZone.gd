@@ -23,8 +23,8 @@ func AffectActorInZone(actor, delta):
 	pass
 
 #Define which actors can perform this zone's action
-func GetActorIsValid(actor):
-	return true
+func GetActorIsValid(actor : Actor):
+	return "InteractButton" in actor
 
 #Refresh contained actors list when one enters
 func _on_body_entered(actor : Actor):

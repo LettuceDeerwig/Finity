@@ -5,9 +5,10 @@
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rwse4"]
 
-[node name="Wall" type="StaticBody2D"]
+[node name="Wall" type="StaticBody2D" node_paths=PackedStringArray("Layer")]
 rotation = 1.5708
 script = ExtResource("1_kcb7l")
+Layer = NodePath("c_LayerHandler")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("WorldBoundaryShape2D_rwse4")

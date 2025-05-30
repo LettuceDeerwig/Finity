@@ -5,8 +5,13 @@
 
 [node name="Layer3" instance=ExtResource("1_44c7p")]
 
-[node name="Parallax2D" parent="." index="0"]
-scroll_scale = Vector2(0.4, 0.4)
-
-[node name="Sprite2D" parent="Parallax2D" index="0"]
+[node name="Trees" type="Sprite2D" parent="." index="0"]
+texture_repeat = 2
+position = Vector2(1360, 400)
+scale = Vector2(5, 5)
 texture = ExtResource("2_8tjyk")
+region_enabled = true
+region_rect = Rect2(0, 0, 544, 160)
+
+[node name="Floor" parent="WorldCollision" index="0"]
+position = Vector2(0, 533)

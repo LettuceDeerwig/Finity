@@ -1,0 +1,60 @@
+[gd_scene load_steps=10 format=3 uid="uid://cbkrlyfgid2an"]
+
+[ext_resource type="Script" uid="uid://b74gmhcq47gj7" path="res://Actors/Mob/VeniusSword.gd" id="1_gdaec"]
+[ext_resource type="Shader" uid="uid://cm0nsa2n81645" path="res://VFX/Common/Shaders/TransparentBG.gdshader" id="1_sefrx"]
+[ext_resource type="Texture2D" uid="uid://dwlunmxtsu1x8" path="res://Assets/Sword_small.png" id="2_vtnuc"]
+[ext_resource type="Script" uid="uid://dtp1kncsovuh7" path="res://Components/c_PropertyScaler.gd" id="3_16vxo"]
+[ext_resource type="Script" uid="uid://cfxgubxeti450" path="res://Actors/Mob/Hitbox.gd" id="3_vtnuc"]
+[ext_resource type="PackedScene" uid="uid://bsrihwmmig5kb" path="res://Components/c_LayerHandler.tscn" id="4_jng2m"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jng2m"]
+shader = ExtResource("1_sefrx")
+shader_parameter/bg_color = Color(0.537255, 0.309804, 0.309804, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sefrx"]
+size = Vector2(69.6863, 224.126)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gdaec"]
+size = Vector2(51.0567, 314.931)
+
+[node name="VeniusSword" type="CharacterBody2D" node_paths=PackedStringArray("Layer", "Scaler", "DependentObjects")]
+scale = Vector2(0.55, 0.55)
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_gdaec")
+Layer = NodePath("c_LayerHandler")
+Scaler = NodePath("c_PropertyScaler")
+DependentObjects = [NodePath("c_Hitbox")]
+metadata/_custom_type_script = "uid://cf3x0vqb2w1s7"
+
+[node name="c_LayerHandler" parent="." node_paths=PackedStringArray("Scaler") instance=ExtResource("4_jng2m")]
+Scaler = NodePath("../c_PropertyScaler")
+
+[node name="c_PropertyScaler" type="Node2D" parent="." node_paths=PackedStringArray("nodes_to_scale")]
+script = ExtResource("3_16vxo")
+nodes_to_scale = [NodePath("..")]
+metadata/_custom_type_script = "uid://dtp1kncsovuh7"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_jng2m")
+texture = ExtResource("2_vtnuc")
+
+[node name="c_Hitbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 2
+script = ExtResource("3_vtnuc")
+
+[node name="Shape" type="CollisionShape2D" parent="c_Hitbox"]
+position = Vector2(22.4292, 47.9786)
+rotation = 2.87979
+shape = SubResource("RectangleShape2D_sefrx")
+disabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(6.38067, 0.307161)
+rotation = 2.87979
+shape = SubResource("RectangleShape2D_gdaec")
+
+[connection signal="area_entered" from="c_Hitbox" to="c_Hitbox" method="_on_area_entered"]
+
+[editable path="c_LayerHandler"]

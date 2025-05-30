@@ -5,8 +5,9 @@
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_rwse4"]
 
-[node name="Floor" type="StaticBody2D"]
+[node name="Floor" type="StaticBody2D" node_paths=PackedStringArray("Layer")]
 script = ExtResource("1_yme2a")
+Layer = NodePath("c_LayerHandler")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("WorldBoundaryShape2D_rwse4")

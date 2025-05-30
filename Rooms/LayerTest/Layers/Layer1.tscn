@@ -1,9 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://oigo7f4ik7hm"]
+[gd_scene load_steps=4 format=3 uid="uid://oigo7f4ik7hm"]
 
 [ext_resource type="PackedScene" uid="uid://c0ut52gk4fg2c" path="res://Rooms/RoomLayer.tscn" id="1_h0cwq"]
 [ext_resource type="PackedScene" uid="uid://dckv2v7uyall5" path="res://Rooms/Objects/ActionZone/BGDoor/BGDoor.tscn" id="2_fqtwi"]
+[ext_resource type="Texture2D" uid="uid://d2ftdjyjoamdb" path="res://Assets/parallax-forest-front-trees.png" id="2_lfw03"]
 
 [node name="Layer1" instance=ExtResource("1_h0cwq")]
+
+[node name="Trees" type="Sprite2D" parent="." index="0"]
+texture_repeat = 2
+position = Vector2(1360, 400)
+scale = Vector2(5, 5)
+texture = ExtResource("2_lfw03")
+region_enabled = true
+region_rect = Rect2(0, 0, 544, 160)
 
 [node name="BGDoor" parent="." index="2" instance=ExtResource("2_fqtwi")]
 position = Vector2(1295, 587)
