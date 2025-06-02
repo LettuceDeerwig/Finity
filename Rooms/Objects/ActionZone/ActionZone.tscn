@@ -27,8 +27,7 @@ texture = ExtResource("3_3ry37")
 position = Vector2(0, 20)
 shape = SubResource("RectangleShape2D_5ouia")
 
-[node name="c_LayerHandler" parent="." node_paths=PackedStringArray("base_object") instance=ExtResource("4_3ry37")]
-base_object = NodePath("..")
+[node name="c_LayerHandler" parent="." instance=ExtResource("4_3ry37")]
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

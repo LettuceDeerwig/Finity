@@ -5,7 +5,6 @@ class_name Actor
 @export var StateMachine : c_StateMachine
 @export var Layer : c_LayerHandler
 @export var Scaler : c_PropertyScaler
-
 @export var DependentObjects : Array[CollisionObject2D]
 
 var CurrentLayer: int :

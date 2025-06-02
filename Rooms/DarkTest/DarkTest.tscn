@@ -1,0 +1,95 @@
+[gd_scene load_steps=15 format=3 uid="uid://dh0467tm0nmc1"]
+
+[ext_resource type="PackedScene" uid="uid://c0ut52gk4fg2c" path="res://Rooms/RoomLayer.tscn" id="1_d5rqe"]
+[ext_resource type="Texture2D" uid="uid://ro67olucrdpu" path="res://Assets/parallax-forest-middle-trees.png" id="2_5ri4f"]
+[ext_resource type="PackedScene" uid="uid://hgxuyd5gqwd" path="res://Actors/Azure/Azure.tscn" id="2_ath3w"]
+[ext_resource type="Texture2D" uid="uid://bel5rqq5o5mhe" path="res://Assets/parallax-forest-back-trees.png" id="2_u2gcs"]
+[ext_resource type="Script" uid="uid://r0jdic3ylkly" path="res://Rooms/DarkTest/HandLight.gd" id="6_eh5kg"]
+[ext_resource type="Shader" uid="uid://cm0nsa2n81645" path="res://VFX/Common/Shaders/TransparentBG.gdshader" id="6_xtoa0"]
+[ext_resource type="Texture2D" uid="uid://cl8napjr65a5i" path="res://Assets/Ledge.png" id="7_wb0vu"]
+[ext_resource type="Script" uid="uid://dgnot5hjf00yc" path="res://Rooms/DarkTest/GrabbableLedge.gd" id="8_wb0vu"]
+
+[sub_resource type="Gradient" id="Gradient_u2gcs"]
+offsets = PackedFloat32Array(0.158249, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_eh5kg"]
+gradient = SubResource("Gradient_u2gcs")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oh25s"]
+shader = ExtResource("6_xtoa0")
+shader_parameter/bg_color = Color(0.709804, 0.901961, 0.113725, 1)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_wb0vu"]
+b = Vector2(194.35, 387.35)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xtoa0"]
+size = Vector2(428, 387)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wb0vu"]
+size = Vector2(40, 26)
+
+[node name="RoomLayer" instance=ExtResource("1_d5rqe")]
+
+[node name="BG" type="Sprite2D" parent="." index="0"]
+texture_repeat = 2
+position = Vector2(0, 400)
+scale = Vector2(5, 5)
+texture = ExtResource("2_u2gcs")
+region_enabled = true
+region_rect = Rect2(0, -212.75, 1632, 372.75)
+
+[node name="Trees" type="Sprite2D" parent="." index="1"]
+texture_repeat = 2
+position = Vector2(0, 400)
+scale = Vector2(5, 5)
+texture = ExtResource("2_5ri4f")
+region_enabled = true
+region_rect = Rect2(0, 0, 1632, 160)
+
+[node name="Azure" parent="Layerables" index="0" instance=ExtResource("2_ath3w")]
+position = Vector2(136, 658)
+
+[node name="Camera2D" type="Camera2D" parent="Layerables/Azure" index="12"]
+position = Vector2(23, -433)
+zoom = Vector2(0.7, 0.7)
+
+[node name="PointLight2D" type="PointLight2D" parent="Layerables/Azure" index="13"]
+position = Vector2(14, -225)
+color = Color(0, 0.499532, 0.919907, 0.784314)
+energy = 2.55
+texture = SubResource("GradientTexture2D_eh5kg")
+texture_scale = 10.0
+script = ExtResource("6_eh5kg")
+
+[node name="Obstacle" type="StaticBody2D" parent="Layerables" index="1"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Layerables/Obstacle" index="0"]
+material = SubResource("ShaderMaterial_oh25s")
+position = Vector2(1080, 563)
+texture = ExtResource("7_wb0vu")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Layerables/Obstacle" index="1"]
+position = Vector2(1198.65, 373.65)
+shape = SubResource("SegmentShape2D_wb0vu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Layerables/Obstacle" index="2"]
+position = Vector2(986, 566.5)
+shape = SubResource("RectangleShape2D_xtoa0")
+
+[node name="GrabbableLedge" type="Area2D" parent="Layerables/Obstacle" index="3"]
+position = Vector2(773, 374)
+script = ExtResource("8_wb0vu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Layerables/Obstacle/GrabbableLedge" index="0"]
+position = Vector2(14, 10.5)
+scale = Vector2(1.5, 1.5)
+shape = SubResource("RectangleShape2D_wb0vu")
+debug_color = Color(0, 0.640572, 0.347856, 0.42)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." index="4"]
+visible = false
+color = Color(0, 0, 0, 1)

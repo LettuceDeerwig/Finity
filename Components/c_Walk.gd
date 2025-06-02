@@ -3,6 +3,7 @@ class_name c_Walk
 
 enum DIRECTION {
 	LEFT = -1,
+	NONE = 0,
 	RIGHT = 1
 }
 
@@ -11,20 +12,22 @@ enum DIRECTION {
 @export var Velocity : c_Velocity
 @export var Direction : int = DIRECTION.RIGHT
 
-func SetDirection(direction : int):
+func SetDirection(obj : CollisionObject2D, direction : int):
+	if Direction != direction:
+		obj.scale.x *= -1
 	Direction = direction
 
-func Step():
+func Step(obj : CollisionObject2D):
 	#Handle walking animation
 	Velocity.Accelerate(Direction)
-	HandleGravity()
-	Velocity.Move(character_body)
+	HandleGravity(obj)
+	Velocity.Move(obj)
 			
-func Hold():
+func Hold(obj : CollisionObject2D):
 	Velocity.Decelerate(Direction)
-	HandleGravity()
-	Velocity.Move(character_body)
+	HandleGravity(obj)
+	Velocity.Move(obj)
 	
-func HandleGravity():
-	if !character_body.is_on_floor():
+func HandleGravity(obj : CollisionObject2D):
+	if !obj.is_on_floor():
 		Velocity.AddGravity()

@@ -13,7 +13,7 @@ func GetCurrent():
 
 func ExecuteCurrent():
 	ExecuteByName(CurrentState)
-	
+
 func ExecuteByName(name : String):
 	var stateToExecute : Callable = States[name]
 	if stateToExecute != null:

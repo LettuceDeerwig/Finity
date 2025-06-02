@@ -7,7 +7,8 @@ class_name c_Jump
 @onready var Modifiers : c_ModifierHandler = $c_ModifierHandler
 
 func _ready():
-	Action = Jump 
+	_onButtonActionReady()
+	Action = Jump
 
 func CanPerform(characterBody : CharacterBody2D) -> bool:
 	return characterBody.is_on_floor()

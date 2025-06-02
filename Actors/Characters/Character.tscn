@@ -51,4 +51,5 @@ script = ExtResource("8_3ssfw")
 
 [node name="c_Jump" parent="." node_paths=PackedStringArray("Velocity") instance=ExtResource("9_6rnnb")]
 Velocity = NodePath("../c_Velocity")
+jump_velocity = -1000.0
 Type = "Jump"

@@ -116,6 +116,9 @@ deceleration = 600.0
 [node name="CollisionShape2D" parent="." index="7"]
 position = Vector2(0, -134)
 
+[node name="c_InteractButton" parent="." index="9" node_paths=PackedStringArray("Actions")]
+Actions = [NodePath("../c_Jump")]
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="10"]
 libraries = {
 &"": SubResource("AnimationLibrary_jng2m")

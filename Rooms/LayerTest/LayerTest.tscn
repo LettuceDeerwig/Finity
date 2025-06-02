@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ttrhp6qmwp30" path="res://Rooms/LayerTest/Layers/Layer3.tscn" id="1_jc3m7"]
 [ext_resource type="PackedScene" uid="uid://oigo7f4ik7hm" path="res://Rooms/LayerTest/Layers/Layer1.tscn" id="3_7ylt2"]
 [ext_resource type="PackedScene" uid="uid://hgxuyd5gqwd" path="res://Actors/Azure/Azure.tscn" id="5_nc5rp"]
-[ext_resource type="Script" uid="uid://bvrvcdb7pqh78" path="res://Rooms/LayerTest/CameraAzure.gd" id="6_vi06h"]
+[ext_resource type="Script" path="res://Rooms/LayerTest/CameraAzure.gd" id="6_vi06h"]
 
 [node name="LayerTest" type="Node2D" node_paths=PackedStringArray("layer_1", "layer_2", "layer_3")]
 script = ExtResource("1_0x1jf")
@@ -22,13 +22,7 @@ depth_scale = 0.7
 [node name="Layer1" parent="." instance=ExtResource("3_7ylt2")]
 
 [node name="Azure" parent="." instance=ExtResource("5_nc5rp")]
-position = Vector2(598, 745)
-
-[node name="Label" type="Label" parent="Azure"]
-offset_left = -41.0
-offset_top = -380.0
-offset_right = 38.0
-offset_bottom = -331.0
+position = Vector2(696, 698)
 
 [node name="CameraAzure" type="Camera2D" parent="." node_paths=PackedStringArray("azure")]
 zoom = Vector2(0.7, 0.7)

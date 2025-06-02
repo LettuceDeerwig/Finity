@@ -23,9 +23,10 @@ func RemoveButtonAction(instanceId):
 		Actions.remove_at(existingIndex)
 	
 func GetButtonActionIndexWithInstanceId(instanceId):
-	for i in Actions.size():
-		if (Actions[i].InstanceId == instanceId):
-			return i
+	if Actions.size() > 0:
+		for i in Actions.size():
+			if (Actions[i].InstanceId == instanceId):
+				return i
 	return -1
 
 func GetHighestPriorityAvailableButtonAction(characterBody : CharacterBody2D) -> c_ButtonAction:

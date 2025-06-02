@@ -3,11 +3,11 @@ extends Character
 
 func _physics_process(delta):
 	var direction = Input.get_axis("arrow_left", "arrow_right")
-	Walk.SetDirection(direction)
+	Walk.SetDirection(self, direction)
 	if direction != 0.0:
-		Walk.Step()
+		Walk.Step(self)
 	else:
-		Walk.Hold()	
+		Walk.Hold(self)	
 	
 	if Input.is_action_just_pressed("p"):
 		Animations.play("swing")

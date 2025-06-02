@@ -10,7 +10,7 @@ class_name Character
 func _ready():
 	_onActorReady()
 	_onCharacterReady()
-	
+
 func _onCharacterReady():
 	InteractButton.AddButtonAction(Jump)
 

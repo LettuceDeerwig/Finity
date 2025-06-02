@@ -1,12 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://hgxuyd5gqwd"]
+[gd_scene load_steps=12 format=3 uid="uid://hgxuyd5gqwd"]
 
 [ext_resource type="PackedScene" uid="uid://75kfy84wkju6" path="res://Actors/Characters/Character.tscn" id="1_t0yss"]
 [ext_resource type="Script" uid="uid://dv7ttb1y1jvia" path="res://Actors/Azure/Azure.gd" id="2_wg7tr"]
 [ext_resource type="Shader" uid="uid://cm0nsa2n81645" path="res://VFX/Common/Shaders/TransparentBG.gdshader" id="3_pp5od"]
 [ext_resource type="Texture2D" uid="uid://dxvt0cxtw7j6f" path="res://Assets/sprite_noDetail_boldColor_noFace.png" id="4_pjkdo"]
 [ext_resource type="Texture2D" uid="uid://cw15oose8y8wx" path="res://Assets/upArrow.png" id="5_wg7tr"]
-[ext_resource type="Script" uid="uid://ccnufvsysjbmv" path="res://Components/c_Hurtbox.gd" id="6_fc1ue"]
+[ext_resource type="Script" path="res://Components/c_Hurtbox.gd" id="6_fc1ue"]
 [ext_resource type="PackedScene" uid="uid://bsrihwmmig5kb" path="res://Components/c_LayerHandler.tscn" id="7_in0k3"]
+[ext_resource type="Script" uid="uid://cf4revxkh04kj" path="res://Actors/Azure/c_LedgeGrab.gd" id="8_aodmh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ow35x"]
 shader = ExtResource("3_pp5od")
@@ -20,13 +21,14 @@ shader_parameter/bg_color = Color(0.392157, 0.435294, 0.509804, 1)
 size = Vector2(75, 257)
 
 [node name="Azure" node_paths=PackedStringArray("DependentObjects") instance=ExtResource("1_t0yss")]
+scale = Vector2(-1, 1)
 collision_layer = 11
 script = ExtResource("2_wg7tr")
 DependentObjects = [NodePath("c_Hurtbox")]
 
 [node name="Sprite2D" parent="." index="0"]
 material = SubResource("ShaderMaterial_ow35x")
-position = Vector2(0, -141)
+position = Vector2(11, -141)
 texture = ExtResource("4_pjkdo")
 
 [node name="DoorIcon" type="Sprite2D" parent="." index="1"]
@@ -46,12 +48,13 @@ gravity = 40.0
 terminal_velocity = 900.0
 
 [node name="CollisionShape2D" parent="." index="7"]
-position = Vector2(-2, -135)
+position = Vector2(5, -135)
 
 [node name="c_InteractButton" parent="." index="9" node_paths=PackedStringArray("Actions")]
 Actions = [NodePath("../c_Jump")]
 
 [node name="c_Hurtbox" type="Area2D" parent="." index="10"]
+position = Vector2(11, 0)
 collision_layer = 2
 collision_mask = 0
 script = ExtResource("6_fc1ue")
@@ -63,7 +66,12 @@ debug_color = Color(0.909859, 0.209985, 0.534268, 0.42)
 
 [node name="c_LayerHandler" parent="c_Hurtbox" index="1" instance=ExtResource("7_in0k3")]
 
-[node name="c_Jump" parent="." index="11"]
-jump_velocity = -800.0
+[node name="c_LedgeGrab" type="RayCast2D" parent="." index="12"]
+position = Vector2(-65, -198)
+rotation = 3.14159
+target_position = Vector2(0, 30)
+collide_with_areas = true
+collide_with_bodies = false
+script = ExtResource("8_aodmh")
 
 [editable path="c_LayerHandler"]
