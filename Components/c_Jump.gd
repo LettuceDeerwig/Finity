@@ -11,7 +11,7 @@ func _ready():
 	Action = Jump
 
 func CanPerform(characterBody : CharacterBody2D) -> bool:
-	return characterBody.is_on_floor()
+	return true
 
 func Jump(characterBody : CharacterBody2D):
 	Velocity.velocity.y += jump_velocity

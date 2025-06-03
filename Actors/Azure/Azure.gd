@@ -9,7 +9,8 @@ enum STATE {
 	IDLE,
 	WALK,
 	AIR,
-	LEDGE
+	LEDGE,
+	SLIDE
 }
 
 var State : int = STATE.IDLE
@@ -29,6 +30,7 @@ func _physics_process(delta):
 	if Input.is_key_pressed(KEY_4):
 		CurrentLayer = 4
 	call(STATE.keys()[State])
+	label.text = STATE.keys()[State]
 
 func IDLE():
 	if Input.is_action_just_pressed("jump"):
@@ -59,11 +61,25 @@ func AIR():
 	if is_on_floor():
 		State = STATE.IDLE
 		return
+	if is_on_wall_only():
+		State = STATE.SLIDE
+		return
 
 func LEDGE():
 	if Input.is_action_just_pressed("jump"):
 		InteractButton.ExecuteCurrentButtonAction(self)
 		State = STATE.AIR
+
+func SLIDE():
+	if Input.is_action_just_pressed("jump"):
+		InteractButton.ExecuteCurrentButtonAction(self)
+	HandleDirection()
+	if !is_on_wall_only() && !is_on_floor():
+		State = STATE.AIR
+		return
+	if is_on_floor():
+		State = STATE.IDLE
+		return
 
 func HandleDirection():
 	var direction = Input.get_axis("left", "right")

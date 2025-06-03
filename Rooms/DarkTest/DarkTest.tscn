@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dh0467tm0nmc1"]
+[gd_scene load_steps=16 format=3 uid="uid://dh0467tm0nmc1"]
 
 [ext_resource type="PackedScene" uid="uid://c0ut52gk4fg2c" path="res://Rooms/RoomLayer.tscn" id="1_d5rqe"]
 [ext_resource type="Texture2D" uid="uid://ro67olucrdpu" path="res://Assets/parallax-forest-middle-trees.png" id="2_5ri4f"]
@@ -8,6 +8,7 @@
 [ext_resource type="Shader" uid="uid://cm0nsa2n81645" path="res://VFX/Common/Shaders/TransparentBG.gdshader" id="6_xtoa0"]
 [ext_resource type="Texture2D" uid="uid://cl8napjr65a5i" path="res://Assets/Ledge.png" id="7_wb0vu"]
 [ext_resource type="Script" uid="uid://dgnot5hjf00yc" path="res://Rooms/DarkTest/GrabbableLedge.gd" id="8_wb0vu"]
+[ext_resource type="PackedScene" uid="uid://qv13febhbg45" path="res://Rooms/WorldCollision/Terrain.tscn" id="9_oh25s"]
 
 [sub_resource type="Gradient" id="Gradient_u2gcs"]
 offsets = PackedFloat32Array(0.158249, 1)
@@ -43,6 +44,7 @@ region_enabled = true
 region_rect = Rect2(0, -212.75, 1632, 372.75)
 
 [node name="Trees" type="Sprite2D" parent="." index="1"]
+visible = false
 texture_repeat = 2
 position = Vector2(0, 400)
 scale = Vector2(5, 5)
@@ -51,7 +53,8 @@ region_enabled = true
 region_rect = Rect2(0, 0, 1632, 160)
 
 [node name="Azure" parent="Layerables" index="0" instance=ExtResource("2_ath3w")]
-position = Vector2(136, 658)
+position = Vector2(-831, 608)
+floor_snap_length = 10.0
 
 [node name="Camera2D" type="Camera2D" parent="Layerables/Azure" index="12"]
 position = Vector2(23, -433)
@@ -65,23 +68,28 @@ texture = SubResource("GradientTexture2D_eh5kg")
 texture_scale = 10.0
 script = ExtResource("6_eh5kg")
 
+[node name="Label" type="Label" parent="Layerables/Azure" index="15"]
+offset_top = -334.0
+offset_right = 40.0
+offset_bottom = -311.0
+
 [node name="Obstacle" type="StaticBody2D" parent="Layerables" index="1"]
+position = Vector2(518, 559)
 
 [node name="Sprite2D" type="Sprite2D" parent="Layerables/Obstacle" index="0"]
 material = SubResource("ShaderMaterial_oh25s")
-position = Vector2(1080, 563)
 texture = ExtResource("7_wb0vu")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Layerables/Obstacle" index="1"]
-position = Vector2(1198.65, 373.65)
+position = Vector2(118, -189)
 shape = SubResource("SegmentShape2D_wb0vu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Layerables/Obstacle" index="2"]
-position = Vector2(986, 566.5)
+position = Vector2(-94, 4)
 shape = SubResource("RectangleShape2D_xtoa0")
 
 [node name="GrabbableLedge" type="Area2D" parent="Layerables/Obstacle" index="3"]
-position = Vector2(773, 374)
+position = Vector2(-309, -188)
 script = ExtResource("8_wb0vu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Layerables/Obstacle/GrabbableLedge" index="0"]
@@ -90,6 +98,8 @@ scale = Vector2(1.5, 1.5)
 shape = SubResource("RectangleShape2D_wb0vu")
 debug_color = Color(0, 0.640572, 0.347856, 0.42)
 
+[node name="Terrain" parent="Layerables" index="2" instance=ExtResource("9_oh25s")]
+position = Vector2(-334, 789)
+
 [node name="CanvasModulate" type="CanvasModulate" parent="." index="4"]
-visible = false
 color = Color(0, 0, 0, 1)

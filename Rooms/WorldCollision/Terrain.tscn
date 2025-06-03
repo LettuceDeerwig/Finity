@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://qv13febhbg45"]
+
+[ext_resource type="Script" uid="uid://bgj3em7tcp18r" path="res://Rooms/WorldCollision/Terrain.gd" id="1_07fvm"]
+
+[node name="Terrain" type="StaticBody2D"]
+script = ExtResource("1_07fvm")
+
+[node name="VisualPolygon" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-54, -31, 79, -31, 109, -73, 475.325, -78.7987, 148.5, -250, -0.5, -238, -98.5, -197, -178.5, -151, -225.5, -118, -262, -91, -326, -31)
+
+[node name="CollisionPolygon" type="CollisionPolygon2D" parent="."]
